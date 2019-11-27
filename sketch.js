@@ -76,8 +76,6 @@ function draw() {
 
 //Wave object
 function Wave(_d) {
-  this.x = windowWidth / 2;
-  this.y = windowHeight / 2;
   this.d = _d;
 
   this.display = function() {
@@ -90,7 +88,7 @@ function Wave(_d) {
       stroke(255);
       strokeWeight(0);
     }
-    ellipse(this.x, this.y, this.d + volume);
+    ellipse(windowWidth/2, windowHeight/2, this.d + volume);
   }
 }
 
