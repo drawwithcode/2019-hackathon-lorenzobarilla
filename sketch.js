@@ -23,15 +23,15 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-//img filters
+  //img filters
   myEarth.filter("gray");
   myEarth.filter(BLUR, 3);
 
-//create analyzer
+  //create analyzer
   analyzer = new p5.Amplitude();
   analyzer.setInput(mySong);
 
-//create waves with Wave obj
+  //create waves with Wave obj
   for (var i = 0; i < amountOfWaves; i++) {
     var tempd = 35 + i * 20;
     var tempWave = new Wave(tempd);
@@ -44,7 +44,7 @@ function draw() {
   // clear();
   background(128);
 
-//show images
+  //show images
   push();
   imageMode(CENTER);
   image(myEarth, windowWidth / 2, windowHeight / 2, windowWidth / 2.5, windowWidth / 2.5);
@@ -55,23 +55,39 @@ function draw() {
   push();
   fill("white");
   noStroke();
-  ellipse(windowWidth/2,windowHeight/2,25);
+  ellipse(windowWidth / 2, windowHeight / 2, 25);
   pop();
 
   push();
   imageMode(CORNER);
-  image(myImage, windowWidth * 0.1, windowHeight * 0.1, myImage.width/10, myImage.height/10);
+  image(myImage, windowWidth * 0.1, windowHeight * 0.1, myImage.width / 10, myImage.height / 10);
   pop();
 
   // get the volume and remap it to a bigger value
   volume = analyzer.getLevel();
   volume = map(volume, 0, 1, 0, height);
 
-//display Wave obj
+  //display Wave obj
   for (var i = 0; i < allMyWaves.length; i++) {
     var w = allMyWaves[i];
     w.display();
   }
+  //text
+  push();
+  fill(255);
+  noStroke();
+  var textPar;
+  if (!mySong.isPlaying() && reproduction == 0) {
+    textPar = "Click to play!"
+  } else if (mySong.isPlaying()) {
+    textPar = "It's Tg1 time!"
+  } else if (!mySong.isPlaying() && reproduction == 1) {
+    textPar = "Click to restart!"
+  }
+
+  textSize(24);
+  text(textPar, windowWidth * 0.1, windowHeight * 0.9);
+  pop();
 }
 
 //Wave object
@@ -88,7 +104,7 @@ function Wave(_d) {
       stroke(255);
       strokeWeight(0);
     }
-    ellipse(windowWidth/2, windowHeight/2, this.d + volume);
+    ellipse(windowWidth / 2, windowHeight / 2, this.d + volume);
   }
 }
 
