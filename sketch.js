@@ -33,7 +33,7 @@ function setup() {
 
 //create waves with Wave obj
   for (var i = 0; i < amountOfWaves; i++) {
-    var tempd = 10 + i * 20;
+    var tempd = 35 + i * 20;
     var tempWave = new Wave(tempd);
     allMyWaves.push(tempWave);
   }
@@ -50,6 +50,12 @@ function draw() {
   image(myEarth, windowWidth / 2, windowHeight / 2, windowWidth / 2.5, windowWidth / 2.5);
   image(myAntenna, windowWidth / 2, windowHeight / 2 + myAntenna.height / 5, myAntenna.width / 2.5, myAntenna.height / 2.5);
   // image(myImage, windowWidth/2, windowHeight - myImage.height *2, myImage.width, myImage.height);
+  pop();
+
+  push();
+  fill("white");
+  noStroke();
+  ellipse(windowWidth/2,windowHeight/2,25);
   pop();
 
   push();
@@ -79,8 +85,10 @@ function Wave(_d) {
     strokeWeight(2);
     if (mySong.isPlaying()) {
       stroke(random(0, 255), random(0, 255), random(0, 255));
+      strokeWeight(2);
     } else {
       stroke(255);
+      strokeWeight(0);
     }
     ellipse(this.x, this.y, this.d + volume);
   }
