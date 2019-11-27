@@ -84,7 +84,7 @@ function draw() {
   } else if (!mySong.isPlaying() && reproduction == 1) {
     textPar = "Click to restart!"
   }
-
+  textFont("Montserrat");
   textSize(24);
   text(textPar, windowWidth * 0.1, windowHeight * 0.9);
   pop();
